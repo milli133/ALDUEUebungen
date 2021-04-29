@@ -1,10 +1,13 @@
 package A03_DoubleLinkedList;
 
 public class DoubleLinkedList<T> {
-    private Node<T> first;
-    private Node<T> last;
-    private Node<T> current;
 
+    // der "Anfang" der Liste
+    private Node<T> first;
+    // das "Ende" der Liste
+    private Node<T> last;
+    // der "Iterator"
+    private Node<T> current;
 
     /**
      * Einfügen einer neuen <T>
@@ -12,24 +15,28 @@ public class DoubleLinkedList<T> {
      * @param a <T>
      */
     public void add(T a) {
-        Node<T> newElement = new Node<T>(a);
+
+        Node<T> newElement = new Node<>(a);
+        // temp merkt sich beim Anfügen das "damals letzte Element", welches man sonst überschreiben würde
         Node<T> temp = null;
 
+        // wenn Liste leer, dann ist das neue erste und letzte Element gleich dem neuen Element
         if (first == null)
             first = newElement;
+        // wenn nicht, dann wird das Eleent nur angefügt
         else {
             last.setNext(newElement);
             temp = last;
         }
         last = newElement;
         last.setPrevious(temp);
-        //current = newElement;
     }
 
     /**
      * Internen Zeiger für next() zurücksetzen
      */
     public void reset() {
+
         current = first;
     }
 
@@ -37,6 +44,7 @@ public class DoubleLinkedList<T> {
      * analog zur Funktion reset()
      */
     public void resetToLast() {
+
         current = last;
     }
 
@@ -68,7 +76,7 @@ public class DoubleLinkedList<T> {
      */
     public T next() {
 
-        T returnData = null;
+        T returnData;
 
         if (current == null)
             return null;
@@ -86,7 +94,7 @@ public class DoubleLinkedList<T> {
      */
     public T previous() {
 
-        T returnData = null;
+        T returnData;
 
         if (current == null)
             return null;
@@ -102,6 +110,7 @@ public class DoubleLinkedList<T> {
      * Ignoriert still, dass current nicht gesetzt ist.
      */
     public void moveNext() {
+
         if (current != null)
             current = current.getNext();
     }
@@ -110,6 +119,7 @@ public class DoubleLinkedList<T> {
      * Analog zur Funktion moveNext()
      */
     public void movePrevious() {
+
         if (current != null)
             current = current.getPrevious();
     }
@@ -135,6 +145,7 @@ public class DoubleLinkedList<T> {
      * @return <T>|null
      */
     public T get(int pos) {
+
         Node<T> n = first;
         int i = 1;
 
@@ -145,6 +156,7 @@ public class DoubleLinkedList<T> {
             i++;
             n = n.getNext();
         }
+
         return n.getData();
     }
 
@@ -155,9 +167,11 @@ public class DoubleLinkedList<T> {
      * @param pos
      */
     public void remove(int pos) {
+
         Node<T> toRemove = first;
         int cnt = 1;
 
+        // zur Stelle von pos iterieren
         while (cnt != pos && toRemove != null) {
             cnt++;
             toRemove = toRemove.getNext();
@@ -166,21 +180,26 @@ public class DoubleLinkedList<T> {
         if (toRemove == null)
             return;
 
+        // siehe Methodenbeschreibung
         if (toRemove == current)
             current = null;
 
+        // wenn das erste Element gelöscht wird, gibts kein previous und first wird eins weiter geschoben
         if (toRemove == first) {
             first = first.getNext();
             first.setPrevious(null);
             return;
         }
 
+        // wenn das letzte Element gelöscht wird, gibts kein next und last wird eins nach vorne geschoben
         if (toRemove == last) {
             last = last.getPrevious();
             last.setNext(null);
             return;
         }
 
+        // "else"
+        // zwischendrinnen wird gelöscht
         toRemove.getPrevious().setNext(toRemove.getNext());
         toRemove.getNext().setPrevious(toRemove.getPrevious());
     }
@@ -199,6 +218,11 @@ public class DoubleLinkedList<T> {
 
         Node<T> toRemove = current;
 
+        // meine Vorgehensweise:
+        // immer zuerst mit den Extremfällen anfangen und diese ausprogrammieren
+        // alles andere in "else" packen
+
+        // wenn das einzige Element gelöscht wird wird alles auf null gesetzt
         if (current == first && current == last) {
             current = null;
             first = null;
@@ -206,22 +230,27 @@ public class DoubleLinkedList<T> {
             return;
         }
 
+        // wenn das erste Element gelöscht wird: nach vorne verlinken und first neu zuweisen
         if (current == first) {
-            current = null;
             first = first.getNext();
             first.setPrevious(null);
             current = first;
+            // return > elseif (auch laufzeittechnisch besser)
             return;
         }
 
+        // wenn das letzte Element gelöscht wird: nach hinten verlinken und last neu zuweisen
         if (current == last) {
-            current = null;
             last = last.getPrevious();
             last.setNext(null);
             current = last;
+            // return > elseif (auch laufzeittechnisch besser)
             return;
         }
 
+        // "else"
+        // wenn zwischendrinnen gelöscht wird, vorne und hinten neu verlinken, indem man
+        // vom toRemove die Verlinkungen vorne und hinten ans current und seinen Nachbarn überträgt
         current = current.getNext();
         toRemove.getPrevious().setNext(current);
         toRemove.getNext().setPrevious(current);
@@ -240,23 +269,20 @@ public class DoubleLinkedList<T> {
         if (current == null)
             throw new CurrentNotSetException();
 
-        Node<T> toInsert = new Node<T>(a);
-        Node<T> n = first;
+        Node<T> toInsert = new Node<>(a);
 
-        // zu current navigieren
-        while (n != current && n != null) {
-            n = n.getNext();
-        }
-
+        // an der letzten Stelle einfügen (nach hinten verlinken und last setzen)
         if (current == last) {
             current.setNext(toInsert);
             toInsert.setPrevious(current);
             last = toInsert;
         } else {
+            // zwischendrinnen einfügen (beide Seiten verlinken)
             toInsert.setNext(current.getNext());
             current.setNext(toInsert);
             toInsert.setPrevious(current);
         }
+        // in jedem Fall wird der Zeiger auf das gerade eingefügte Element gesetzt
         current = toInsert;
     }
 }
