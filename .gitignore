@@ -1,0 +1,13 @@
+# Project exclude paths
+/out/
+/src/A04_TraverseTree/
+/src/A05_Breitensuche/
+/src/A06_Tiefensuche/
+/src/A07_BubbleSort/
+/src/A08_MergeSort/
+/src/A09_GraphZusammen/
+/src/A10_ZyklenTiefensuche/
+/src/A11_DijkstraPQShortestPath/
+/src/A12_Zustandsautomat/
+/src/A13_DijkstraLand/
+/src/org/campus02/demonode/
