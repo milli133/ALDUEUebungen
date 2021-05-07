@@ -47,11 +47,7 @@ public class Wörterbuch {
             return 0;
 
         woerter = new ArrayList<>();
-
-        int i = 0;
-
         Wort erstesWort = find(w.getWort());
-
         collectViaPreorder(erstesWort);
 
         return woerter.size();
