@@ -46,6 +46,7 @@ public class Breitensuche extends BaseTree<Integer> {
         for (i = 1; i <= height; i++) {
             nodes.addAll(getBreadthFirstOrderForLevel(start, i));
         }
+        //System.out.println(nodes.toString());
 
         // gesammelte Nodes zurückliefern
         return nodes;
@@ -66,19 +67,22 @@ public class Breitensuche extends BaseTree<Integer> {
         if (start == null)
             return null;
 
-        // wenn ich auf dem Level bin, die Node zur Liste hinzufügen
+        // passiert "nach" dem letzten if, da man ja per Rekursion nach unten traversiert
+        // bis man am richtigen Level angekommen ist
+        // hier wird die Node zur Liste hinzugefügt
         if (level == 1) {
             nodesOnLevel.add(start.getValue());
             //System.out.print(start.getValue() + " - ");
         }
 
         if (level > 1) {
-            // Via Rekursion so weit im Baum nach unten traversieren, bis man auf dem
-            // Level ist, wo man sein möchte, dann immer alle Nodes zur Liste hinzufügen
+            // Via Rekursion so lange im Baum nach unten traversieren, wie es linke / rechte Kindselemente gibt
+            // wird das richtige Level erreicht, kommt man ins vorherige if; wenn nicht wird
+            // Level verringert und weiter gesucht
             if (start.getLeft() != null)
-                nodesOnLevel.addAll(getBreadthFirstOrderForLevel(start.getLeft(), level - 1));
+                nodesOnLevel.addAll(getBreadthFirstOrderForLevel(start.getLeft(), level-1));
             if (start.getRight() != null)
-                nodesOnLevel.addAll(getBreadthFirstOrderForLevel(start.getRight(), level - 1));
+                nodesOnLevel.addAll(getBreadthFirstOrderForLevel(start.getRight(), level-1));
         }
 
         // gesammelte Nodes zurückliefern
