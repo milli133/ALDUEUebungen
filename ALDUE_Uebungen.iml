@@ -4,17 +4,6 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A04_TraverseTree" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A05_Breitensuche" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A06_Tiefensuche" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A07_BubbleSort" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A08_MergeSort" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A09_GraphZusammen" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A10_ZyklenTiefensuche" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A11_DijkstraPQShortestPath" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A12_Zustandsautomat" />
-      <excludeFolder url="file://$MODULE_DIR$/src/A13_DijkstraLand" />
-      <excludeFolder url="file://$MODULE_DIR$/src/org/campus02/demonode" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
