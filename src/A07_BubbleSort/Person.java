@@ -1,29 +1,41 @@
 package A07_BubbleSort;
 
 public class Person {
-	
-	private final String nachname;
-	
-	private final String vorname;
 
-	public Person(String vorname, String nachname) {
-		this.nachname = nachname;
-		this.vorname = vorname;
-	}
+    private final String nachname;
 
-	public String getNachname() {
-		return nachname;
-	}
-	
-	public String getVorname() {
-		return vorname;
-	}
-	
-	/**
-	 * Vergleicht zwei Personen miteinander
-	 * @return <0, wenn a<b || =0, wenn a=b || >0, wenn a>b
-	 */
-	public int compareTo(Person p) {
-		return 0;
-	}
+    private final String vorname;
+
+    public Person(String vorname, String nachname) {
+        this.nachname = nachname;
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    /**
+     * Vergleicht zwei Personen miteinander
+     *
+     * @return <0, wenn a<b || =0, wenn a=b || >0, wenn a>b
+     */
+    public int compareTo(Person p) {
+
+        if (nachname.compareTo(p.getNachname()) < 0)
+            return -1;
+        if (nachname.compareTo(p.getNachname()) > 0)
+            return 1;
+
+        if (vorname.compareTo(p.getVorname()) < 0)
+            return -1;
+        if (vorname.compareTo(p.getVorname()) > 0)
+            return 1;
+
+        return 0;
+    }
 }

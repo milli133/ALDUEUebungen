@@ -14,6 +14,8 @@ public class Breitensuche extends BaseTree<Integer> {
     }
 
     int calculateHeight(Node root) {
+
+        // Hilfsmethode, damit die Anzahl der Ebenen des Baums
         if (root == null)
             return 0;
         else {

@@ -13,6 +13,10 @@ public class Tiefensuche extends BaseTree<Film> {
 	 */
 	protected int compare(Film a, Film b) {
 
+		if (a.getLänge() > b.getLänge())
+			return -1;
+		if (a.getLänge() < b.getLänge())
+			return 1;
 		return 0;
 	}
 

@@ -18,7 +18,12 @@ public class Demo {
         bs.add(5);
         bs.add(15);
 
+        for (int i = 1; i <= bs.calculateHeight(bs.getRoot()); i++) {
+            System.out.println("Level " + i + " " + bs.getBreadthFirstOrderForLevel(bs.getRoot(), i));
+        }
+
         //System.out.println(bs.getBreadthFirstOrderForLevel(bs.getRoot(), 4).toString());
-        System.out.println(bs.getBreadthFirstOrder(bs.getRoot()).toString());
+        System.out.println(System.lineSeparator() + "Reihenfolge der Knoten via Breitensuche: " +
+                bs.getBreadthFirstOrder(bs.getRoot()));
     }
 }
